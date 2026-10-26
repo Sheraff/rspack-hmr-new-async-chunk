@@ -1,5 +1,7 @@
 # Rspack HMR: updated module re-executes before its new async vendor chunk is loaded
 
+Issue: https://github.com/web-infra-dev/rspack/issues/16288
+
 `src/lazy.js` is loaded with `import()` and self-accepts. `repro.mjs` starts the Rsbuild dev server, opens the page
 in headless Chromium, then edits `src/lazy.js` to add its first `node_modules` import (`lodash`). `splitChunks` puts
 lodash in a new async chunk, and the hot update re-executes `src/lazy.js` before that chunk is loaded.
